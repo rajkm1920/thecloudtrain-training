@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: test-pv
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  csi:
+    driver: ebs.csi.aws.com
+    fsType: ext4
+    volumeHandle: vol-0001730fbd5b34ef3
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: topology.kubernetes.io/zone
+              operator: In
+              values:
+                - us-east-1a

@@ -1,0 +1,44 @@
+# A varibale is an object that stores data
+
+# 1. Global variable
+# 2. Local or Task variable
+# 3. User defined ( taking input from user)
+
+
+- name: Demo on vars
+  hosts: localhost
+  vars:
+    URL_PLAY: play.example.com
+  tasks:
+    - name: Print variable
+      ansible.builtin.debug:
+        msg: URL_PLAY - {{ URL_PLAY }}
+
+    - name: Print variable
+      ansible.builtin.debug:
+        msg: URL_PLAY - {{ URL_PLAY }}  
+
+    - name: Task variable
+      ansible.builtin.debug:
+        msg: URL_TASK - {{ URL_TASK }}
+      vars:
+        URL_TASK: tasks.example.com  
+    
+    - name: Print variable
+      ansible.builtin.debug:
+        msg: URL_PLAY - {{ URL_PLAY }}   
+
+    - name: Task variable
+      ansible.builtin.debug:
+        msg: "{{ URL_CUSTOM }}" 
+
+    - name: demo
+      ansible.builtin.shell: uptime
+      register: OUTPUT 
+      
+    - name: Print OUTPUT of previous task
+      ansible.builtin.debug:
+        msg: "{{ OUTPUT.stdout }}"            
+
+
+# ansible-playbook vars.yml -e "URL_CUSTOM='Akas Patranobis'"

@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  lables:
+    app: nginx
+  namespace: xyz
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.4
+    ports:
+    - containerPort: 80
+  - name: frontend
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+    env:
+     - name: COLOR
+       value: blue
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-1
+  lables:
+    app: nginx
+  namespace: xyz
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.4
+    ports:
+    - containerPort: 80
+  - name: frontend
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+    env:
+     - name: COLOR
+       value: blue
+
+*.yaml 
+
+====================
+
+Namespace : A sechuled box inside your cluster. (2 clustomers - A,B)
+
+
+kubectl --> command line for kubernetes ( kubectl apply -f abc.yaml)
+
+
+===================================================================
+Do apply this tag to all your AWS EKS subnets:
+kubernetes.io/cluster/<your-eks-clustername> shared
+
+example:
+kubernetes.io/cluster/my-eks-cluster shared
+kubernetes.io/role/elb 1
+
+==================================
+
+
+Commands to connect to EKS
+1. ADD adminstrator role to the ec2 machine that u are trying to connect.
+
+2. aws configure and Create your AWS Access Keys.
+
+3. aws eks update-kubeconfig --name my-eks-cluster --region us-east-1

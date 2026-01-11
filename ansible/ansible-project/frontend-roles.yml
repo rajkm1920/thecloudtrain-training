@@ -1,0 +1,6 @@
+- name: Frontend App
+  hosts: all
+  become: yes
+  roles:
+    - frontend
+       
